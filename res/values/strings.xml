@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CoffeeTime</string>
+    <string name="action_settings">Settings</string>
+    <string name="num_puerto">Port Number</string>
+    <string name="address_server">Address Server</string>
+    <string name="connect">Connect</string>
+    <string name="messageText">Write the message</string>
+    <string name="send">Send</string>
+</resources>
