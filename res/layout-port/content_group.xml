@@ -10,39 +10,39 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="es.urjc.alberto.coffeetime.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context="es.urjc.alberto.coffeetime.WriterActivity"
+    tools:showIn="@layout/activity_person">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/nameTag"
-        android:id="@+id/nameLoginTag"
+        android:text="@string/destinationTextGroup"
+        android:id="@+id/destinationTag"
         android:gravity="center_horizontal"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/nameLogin"
+        android:id="@+id/destinationGroup"
         android:gravity="center_horizontal" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/passTag"
-        android:id="@+id/passLoginTag"
+        android:text="@string/messageText"
+        android:id="@+id/sendTag"
         android:gravity="center_horizontal"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/passLogin"
+        android:id="@+id/messageGroup"
         android:gravity="center_horizontal" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/login"
-        android:id="@+id/login"/>
+        android:text="@string/send"
+        android:id="@+id/sendGroup"/>
 
 </LinearLayout>

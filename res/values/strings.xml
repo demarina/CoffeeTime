@@ -1,9 +1,16 @@
 <resources>
     <string name="app_name">CoffeeTime</string>
     <string name="action_settings">Settings</string>
-    <string name="num_puerto">Port Number</string>
-    <string name="address_server">Address Server</string>
-    <string name="connect">Connect</string>
+    <string name="nameTag">Name</string>
+    <string name="passTag">Password</string>
+    <string name="login">Login</string>
     <string name="messageText">Write the message</string>
+    <string name="destinationText">Person name</string>
+    <string name="destinationTextGroup">Group name</string>
+    <string name="sendPerson">Send Person</string>
+    <string name="sendGroup">Send Group</string>
+    <string name="view">View Messages</string>
     <string name="send">Send</string>
+    <string name="messageListText">Messages list</string>
+    <string name="contactsTag">Contacts</string>
 </resources>

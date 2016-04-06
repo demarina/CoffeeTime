@@ -10,8 +10,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="es.urjc.alberto.coffeetime.MainActivity"
-    tools:showIn="@layout/activity_conected">
+    tools:context="es.urjc.alberto.coffeetime.PersonActivity"
+    tools:showIn="@layout/activity_person">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/destinationText"
+        android:id="@+id/destinationTag"
+        android:gravity="center_horizontal"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/destination"
+        android:gravity="center_horizontal" />
 
     <TextView
         android:layout_width="match_parent"
@@ -31,11 +44,5 @@
         android:layout_height="match_parent"
         android:text="@string/send"
         android:id="@+id/send"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/response"
-        android:gravity="center_horizontal"/>
 
 </LinearLayout>

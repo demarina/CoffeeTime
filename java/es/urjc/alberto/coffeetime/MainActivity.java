@@ -15,11 +15,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        EditText address = (EditText) findViewById(R.id.addressNumber);
-        EditText portText = (EditText) findViewById(R.id.portNumber);
-        Button connect = (Button) findViewById(R.id.connect);
-        connect.setOnClickListener(new ListenerConnect(address, portText, this));
+        EditText name = (EditText) findViewById(R.id.nameLogin);
+        EditText pass = (EditText) findViewById(R.id.passLogin);
+        Button login = (Button) findViewById(R.id.login);
+        login.setOnClickListener(new ListenerConnect(name, pass, this));
     }
 
 }
