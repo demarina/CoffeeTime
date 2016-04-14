@@ -50,7 +50,6 @@ public class ViewContacts implements Runnable{
             odata.flush();
             idata = new DataInputStream(new BufferedInputStream(s.getInputStream()));
             int size = idata.readInt();
-            Log.d("piru", "" + size);
             int i = 0;
             while(i < size){
                 length = idata.readInt();
@@ -58,11 +57,11 @@ public class ViewContacts implements Runnable{
                 idata.read(buf);
                 contact = new String (buf, "UTF-8");
                 contList.add(contact);
-                Log.d("piru", contact);
                 i++;
             }
             if(size > 0){
-                v.post(new showContact(act, contList));
+                act.runOnUiThread(new showContact(act, contList));
+                //v.post(new showContact(act, contList));
             }
             s.close();
         } catch (IOException e) {

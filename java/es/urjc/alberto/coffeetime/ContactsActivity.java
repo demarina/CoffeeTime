@@ -37,7 +37,7 @@ public class ContactsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        Thread t = new Thread(new ViewContacts(this.findViewById(android.R.id.content), this, name));
+        Thread t = new Thread(new ViewContacts(findViewById(android.R.id.content), this, name));
         t.start();
     }
 
