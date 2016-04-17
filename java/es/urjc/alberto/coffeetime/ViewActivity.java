@@ -27,6 +27,9 @@ public class ViewActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Thread asker = new Thread(new AskMessage(name, this,
+                                    findViewById(android.R.id.content)));
+        asker.start();
         showMessages();
     }
 

@@ -50,8 +50,6 @@ public class Loger implements Runnable{
             idata = new DataInputStream(new BufferedInputStream(s.getInputStream()));
             ok = idata.readInt();
             if(ok == 1){
-                Thread asker = new Thread(new AskMessage(name, main.getApplicationContext()));
-                asker.start();
                 v.post(new Go2WriterActivity(main, name));
             }else {
                 String toas = "Name or password incorrect! Try again.";

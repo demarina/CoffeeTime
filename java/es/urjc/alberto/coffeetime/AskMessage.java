@@ -3,6 +3,7 @@ package es.urjc.alberto.coffeetime;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -15,11 +16,13 @@ import java.net.Socket;
 public class AskMessage implements Runnable{
 
     public String name;
-    public Context ctx;
+    public Activity act;
+    public View v;
 
-    public AskMessage(String name, Context ctx){
+    public AskMessage(String name, Activity act, View v){
         this.name = name;
-        this.ctx = ctx;
+        this.act = act;
+        this.v = v;
     }
 
     @Override
@@ -63,11 +66,12 @@ public class AskMessage implements Runnable{
                         byte[] buf = new byte[length];
                         idata.read(buf);
                         message = new String (buf, "UTF-8");
-                        int lastId = SchedulerFile.getLastId(name, ctx);
+                        int lastId = SchedulerFile.getLastId(name, act.getApplicationContext());
                         lastId++;
                         String messageTotal = "" + lastId + "%" + name + "%" +message;
-                        SchedulerFile.writeMessage(messageTotal, ctx);
-
+                        Log.d("piru", messageTotal);
+                        SchedulerFile.writeMessage(messageTotal, act.getApplicationContext());
+                        act.runOnUiThread(new ShowNewMessage(act, message));
                         i++;
                     }
                     s.close();
