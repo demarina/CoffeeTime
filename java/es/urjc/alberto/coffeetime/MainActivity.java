@@ -3,7 +3,6 @@ package es.urjc.alberto.coffeetime;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -20,5 +19,4 @@ public class MainActivity extends AppCompatActivity {
         Button login = (Button) findViewById(R.id.login);
         login.setOnClickListener(new ListenerConnect(name, pass, this));
     }
-
 }
