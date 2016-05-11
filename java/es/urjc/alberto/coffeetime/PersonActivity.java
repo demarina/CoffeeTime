@@ -1,5 +1,8 @@
 package es.urjc.alberto.coffeetime;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -21,27 +24,30 @@ import android.widget.EditText;
 public class PersonActivity extends AppCompatActivity {
 
     String name;
-    private Messenger service;
-    private ConnecterService connection;
-    private Context mContext;
+//    private Messenger service;
+//    private ConnecterService connection;
+//    private Context mContext;
+//    private Service boundService;
 
-    private class ConnecterService implements ServiceConnection {
-
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder ibinder) {
-            Log.v("piru", "onServiceConnected!");
-            service = new Messenger(ibinder);
-        }
-        @Override
-        public void onServiceDisconnected(ComponentName arg0) {
-            Log.v("piru", "onServiceDisconnected!");
-            service = null;
-        }
-    }
+//    private class ConnecterService implements ServiceConnection {
+//
+//        public void onServiceConnected(ComponentName name, IBinder service) {
+//            Log.d("MainActivity", "onServiceConnected");
+//            MessageService.LocalBinder binder = (MessageService.LocalBinder) service;
+//            boundService = binder.getService();
+//        }
+//
+//        @Override
+//        public void onServiceDisconnected(ComponentName arg0) {
+//            Log.d("piru", "onServiceDisconnected!");
+//            service = null;
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         resuming();
+        Log.d("piru", "Person!!");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person);
 
@@ -55,45 +61,44 @@ public class PersonActivity extends AppCompatActivity {
         Button send = (Button) findViewById(R.id.send);
         send.setOnClickListener(new ListenerSendPerson(this.name,destinationBut, messageBut, this));
 
-        connection = new ConnecterService();
-        mContext = getApplicationContext();
+        //connection = new ConnecterService();
+        //mContext = getApplicationContext();
     }
 
     @Override
     protected void onStart(){
         super.onStart();
-        //Intent i = new Intent("es.urjc.alberto.coffeetime.SERVICER");
         Intent i = new Intent(this, MessageService.class);
         if(i != null){
-            mContext.bindService(i, connection, Context.BIND_AUTO_CREATE);
-            Log.v("piru", "bound!");
-
+            i.putExtra("name", name);
+            startService(i);
+            Log.d("piru", "startService!");
         }
 
-        if(service != null){
-            Message m = Message.obtain(null, MessageService.MSG_SAY_HELLO, 0, 0);
-            try{
-                service.send(m);
-            }catch(Exception e){
-
-            }
-            Log.v("piru", "ButtonOneListener: message sent!");
-        }else{
-            Log.v("piru", "ButtonOneListener: the service not connected!");
-        }
+//        if(service != null){
+//            Message m = Message.obtain(null, MessageService.MSG_SAY_HELLO, 0, 0);
+//            try{
+//                service.send(m);
+//            }catch(Exception e){
+//
+//            }
+//            Log.v("piru", "ButtonOneListener: message sent!");
+//        }else{
+//            Log.v("piru", "ButtonOneListener: the service not connected!");
+//        }
 
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        try{
-            if(service != null){
-                unbindService(connection);
-            }
-        }catch (Exception e){
-
-        }
+//        try{
+//            if(service != null){
+//                unbindService(connection);
+//            }
+//        }catch (Exception e){
+//
+//        }
     }
 
     public void resuming(){

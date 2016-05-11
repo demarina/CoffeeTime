@@ -44,32 +44,6 @@ public class SchedulerFile {
             e.printStackTrace();
         }
 
-//        try {
-//            FileOutputStream fOut = new FileOutputStream(myFile);
-//            OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
-//            myOutWriter.append(message);
-//            myOutWriter.append("\n");
-//            myOutWriter.close();
-//            fOut.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-//        try{
-//            FileOutputStream fOut = ctx.openFileOutput("Messages", ctx.MODE_APPEND);
-//            OutputStreamWriter osw = new OutputStreamWriter(fOut);
-//            try{
-//                osw.write(message);
-//                osw.write("\n");
-//                osw.flush();
-//                osw.close();
-//            }catch(IOException e){
-//                e.printStackTrace();
-//            }
-//        } catch(FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
     }
 
     public static int getLastId(String name, Context ctx) {
@@ -102,37 +76,6 @@ public class SchedulerFile {
 
     }
 
-//        try {
-//            InputStream inputStream = ctx.openFileInput("Messages");
-//            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-//            BufferedReader br = new BufferedReader(inputStreamReader);
-//            String line;
-//            try {
-//                while ((line = br.readLine()) != null) {
-//                    while ((line = br.readLine()) != null) {
-//                    if (line.equals(""))
-//                        continue;
-//                    String[] spliteado = line.split("%");
-//                    if (spliteado[1].equals(name)) {
-//                        int id = Integer.parseInt(spliteado[0]);
-//                        if (id > last)
-//                            last = id;
-//                    }
-//                }
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            } finally {
-//                try {
-//                    if (br != null) br.close();
-//                } catch (IOException ex) {
-//                    ex.printStackTrace();
-//                }
-//            }
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
     public static List<String> readMessages(Context ctx, String name) {
         File externalStorageDir = ctx.getExternalFilesDir("myapp");
         File myFile = new File(externalStorageDir, "Messages");
@@ -158,34 +101,3 @@ public class SchedulerFile {
     }
 
 }
-
-//        List<String> messages = new ArrayList<String>();
-//        try{
-//            InputStream inputStream = ctx.openFileInput("Messages");
-//            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-//            BufferedReader br = new BufferedReader(inputStreamReader);
-//            String line;
-//            try {
-//                while ((line = br.readLine()) != null) {
-//                    if(line.equals(""))
-//                        continue;
-//                    String[] spliteado = line.split("%");
-//                    if(spliteado[1].equals(name)){
-//                        messages.add(spliteado[2]+"%"+spliteado[3]);
-//                    }
-//
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            } finally {
-//                try {
-//                    if (br != null)br.close();
-//                } catch (IOException ex) {
-//                    ex.printStackTrace();
-//                }
-//            }
-//        } catch(FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return messages;

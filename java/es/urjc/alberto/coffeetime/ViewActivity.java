@@ -18,7 +18,6 @@ import java.util.List;
 public class ViewActivity extends AppCompatActivity {
 
     String name;
-    Thread asker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +27,12 @@ public class ViewActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//        Thread asker = new Thread(new AskMessage(name, this,
-//                                    findViewById(android.R.id.content)));
-//        this.asker = asker;
-//        asker.start();
         showMessages();
     }
 
     @Override
     public void onStop(){
         super.onStop();
-        this.asker.interrupt();
     }
 
     public void resuming(){
@@ -80,19 +74,16 @@ public class ViewActivity extends AppCompatActivity {
 
         switch(type){
             case "Send Person":
-                //this.asker.interrupt();
                 myIntent = new Intent(this.getApplicationContext(), PersonActivity.class);
                 myIntent.putExtra("name", name);
                 this.startActivity(myIntent);
                 return true;
             case "Send Group":
-                //this.asker.interrupt();
                 myIntent = new Intent(this.getApplicationContext(), GroupActivity.class);
                 myIntent.putExtra("name", name);
                 this.startActivity(myIntent);
                 return true;
             case "Contacts":
-                //this.asker.interrupt();
                 myIntent = new Intent(this.getApplicationContext(), ContactsActivity.class);
                 myIntent.putExtra("name", name);
                 this.startActivity(myIntent);
