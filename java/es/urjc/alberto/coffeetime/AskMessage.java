@@ -46,7 +46,7 @@ public class AskMessage implements Runnable{
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-                ctx).setSmallIcon(R.drawable.notification_template_icon_bg)
+                ctx).setSmallIcon(R.drawable.coffee)
                 .setContentTitle("Coffee Time")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(text))
                 .setContentText(text);
