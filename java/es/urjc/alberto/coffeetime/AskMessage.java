@@ -1,12 +1,12 @@
 package es.urjc.alberto.coffeetime;
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -18,18 +18,27 @@ import java.net.Socket;
 
 public class AskMessage implements Runnable{
 
-    public String name;
-    public Context ctx;
+    private String name;
+    private Context ctx;
+    private boolean bound;
+    private Activity act;
 
-    public AskMessage(String name, Context ctx){
+    public AskMessage(String name, Context ctx, boolean bound){
         this.name = name;
         this.ctx = ctx;
+        this.bound = bound;
+    }
+
+    public AskMessage(String name, Context ctx, Activity act, boolean bound){
+        this.name = name;
+        this.ctx = ctx;
+        this.bound = bound;
+        this.act = act;
     }
 
     @Override
     public void run() {
         getMessages2Server();
-        Log.d("piru", "ASK!!");
     }
 
     private void showNotification(String text){
@@ -47,12 +56,17 @@ public class AskMessage implements Runnable{
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(ctx);
         stackBuilder.addParentStack(ViewActivity.class);
         stackBuilder.addNextIntent(intent);
-
         PendingIntent contentIntent = stackBuilder.getPendingIntent(0,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(contentIntent);
         mBuilder.setAutoCancel(true);
         mNotificationManager.notify(1, mBuilder.build());
+    }
+
+    public static void cancelNotification(Context ctx, int notifyId) {
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) ctx.getSystemService(ns);
+        nMgr.cancel(notifyId);
     }
 
     public void getMessages2Server(){
@@ -85,9 +99,12 @@ public class AskMessage implements Runnable{
                         int lastId = SchedulerFile.getLastId(name, ctx);
                         lastId++;
                         String messageTotal = "" + lastId + "%" + name + "%" +message;
-                        //Log.d("piru", messageTotal);
-                        showNotification("Tienes un nuevo mensaje");
                         SchedulerFile.writeMessage(messageTotal, ctx);
+                        if(bound){
+                            act.runOnUiThread(new ShowNewMessage(act, message));
+                        }else{
+                            showNotification("Tienes mensajes nuevos");
+                        }
                         i++;
                     }
                     s.close();

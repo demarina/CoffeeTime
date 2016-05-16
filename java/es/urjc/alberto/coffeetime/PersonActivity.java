@@ -1,16 +1,7 @@
 package es.urjc.alberto.coffeetime;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.Service;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.os.Message;
-import android.os.Messenger;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,25 +15,7 @@ import android.widget.EditText;
 public class PersonActivity extends AppCompatActivity {
 
     String name;
-//    private Messenger service;
-//    private ConnecterService connection;
-//    private Context mContext;
-//    private Service boundService;
 
-//    private class ConnecterService implements ServiceConnection {
-//
-//        public void onServiceConnected(ComponentName name, IBinder service) {
-//            Log.d("MainActivity", "onServiceConnected");
-//            MessageService.LocalBinder binder = (MessageService.LocalBinder) service;
-//            boundService = binder.getService();
-//        }
-//
-//        @Override
-//        public void onServiceDisconnected(ComponentName arg0) {
-//            Log.d("piru", "onServiceDisconnected!");
-//            service = null;
-//        }
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +33,6 @@ public class PersonActivity extends AppCompatActivity {
         EditText messageBut = (EditText) findViewById(R.id.message);
         Button send = (Button) findViewById(R.id.send);
         send.setOnClickListener(new ListenerSendPerson(this.name,destinationBut, messageBut, this));
-
-        //connection = new ConnecterService();
-        //mContext = getApplicationContext();
     }
 
     @Override
@@ -75,30 +45,11 @@ public class PersonActivity extends AppCompatActivity {
             Log.d("piru", "startService!");
         }
 
-//        if(service != null){
-//            Message m = Message.obtain(null, MessageService.MSG_SAY_HELLO, 0, 0);
-//            try{
-//                service.send(m);
-//            }catch(Exception e){
-//
-//            }
-//            Log.v("piru", "ButtonOneListener: message sent!");
-//        }else{
-//            Log.v("piru", "ButtonOneListener: the service not connected!");
-//        }
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-//        try{
-//            if(service != null){
-//                unbindService(connection);
-//            }
-//        }catch (Exception e){
-//
-//        }
     }
 
     public void resuming(){

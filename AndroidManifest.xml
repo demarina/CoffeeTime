@@ -64,10 +64,6 @@
             </intent-filter>
         </activity>
         <service android:name="es.urjc.alberto.coffeetime.MessageService">
-            <intent-filter>
-                <action android:name="es.urjc.alberto.coffeetime.SERVICER" >
-                </action>
-            </intent-filter>
         </service>
     </application>
 

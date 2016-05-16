@@ -1,15 +1,18 @@
 package es.urjc.alberto.coffeetime;
 
 
+import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +22,25 @@ public class ViewActivity extends AppCompatActivity {
 
     String name;
 
+    private boolean bounded = false;
+    private MessageService boundService;
+    Activity act = this;
+
+    private ServiceConnection mServiceConnection = new ServiceConnection() {
+
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            MessageService.LocalBinder binder = (MessageService.LocalBinder) service;
+            boundService = binder.getService();
+            boundService.setPrint(act);
+            bounded = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            bounded = false;
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         resuming();
@@ -27,12 +49,39 @@ public class ViewActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        AskMessage.cancelNotification(this.getApplicationContext(), 1);
         showMessages();
+
+        Intent intent = new Intent(this, MessageService.class);
+        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     public void onStop(){
         super.onStop();
+        try{
+            if(bounded){
+                boundService.unsetPrint();
+                unbindService(mServiceConnection);
+                bounded = false;
+            }
+        }catch (Exception e){
+
+        }
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        try{
+            if(bounded){
+                boundService.unsetPrint();
+                unbindService(mServiceConnection);
+                bounded = false;
+            }
+        }catch (Exception e){
+
+        }
     }
 
     public void resuming(){
